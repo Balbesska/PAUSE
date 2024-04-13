@@ -1,0 +1,92 @@
+/*Стили для стартовой страницы*/
+.Welcome {
+
+    border-radius: 10px;
+    height: 280px;
+    width: auto;
+    margin: 50px 20px 0px 20px;
+    padding: 10px 100px 10px 100px;
+    border: 20px solid; /* Устанавливаем толщину рамки и делаем ее прозрачной */
+    border-image: url('../img/ee.png') 30; /* Устанавливаем изображение и повторяемость граничного изображения */
+    
+  }
+  .Welcome p{
+    color: #EED8BD;
+    font-size: 25px;
+  }
+  
+  .Cards{
+    border-radius: 10px;
+    margin: 40px 0px 20px 0px;
+    padding: 0px 0px 0px 0px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .miniCards, .miniCardsCenter{
+    background: #EED8BD;
+    width: 100px;
+    height: 950px;
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+  
+    border-radius: 10px;
+  }
+
+  .miniCards{
+    background: #EED8BD;
+    color: #78462C;
+  }
+  .miniCardsCenter{
+    background: #78462C;
+    color: #D19E79;
+  }
+  
+  #AboutCoff {
+    display: flex;
+    align-items: center;
+    background-color: #EED8BD;
+    color: #78462C;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 45px;
+    
+  }
+  
+  #AboutCoff > div {
+    flex: 1;
+    text-align: right;
+    margin-right: 20px;
+  }
+  #AboutCoff  p {
+    font-size: 20px;
+  }
+  #AboutCoff  h2 {
+    font-size: 50px;
+  }
+  
+
+  .PhotoCoff {
+    height: 100%;
+    width: 800px;
+    margin-right: 20px; /* добавьте небольшой отступ между изображением и текстом */
+
+    border-radius: 10px  0px  0px 10px;
+    
+  }
+
+  .aboutCards{
+    margin-top: 30px;
+
+  }
+  
+  
+  .aboutPhoto{
+    width: 500px;
+    height: 690px;
+    border-radius: 25px;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  

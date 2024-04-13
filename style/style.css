@@ -1,0 +1,369 @@
+/* Общие стили страницы */
+
+@font-face {
+  font-family: Maler;
+  src: url('text/Maler.ttf') format('woff2'),
+}
+
+body{
+    font-family: "Maler" ;
+    background-color: #20130E;
+
+    overflow-x: hidden;
+}
+
+
+
+.preloader {
+  /*фиксированное позиционирование*/
+  position: fixed;
+  /* координаты положения */
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  /* фоновый цвет элемента */
+  background: #20130E;
+  /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+  z-index: 1001;
+}
+
+.preloader__row {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 70px;
+  height: 70px;
+  margin-top: -35px;
+  margin-left: -35px;
+  text-align: center;
+  animation: preloader-rotate 5s infinite linear;
+}
+
+.preloader__item {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  background-color: #78462C;
+  border-radius: 100%;
+  width: 35px;
+  height: 35px;
+  animation: preloader-bounce 5s infinite ease-in-out;
+}
+
+.preloader__item:last-child {
+  top: auto;
+  bottom: 0;
+  animation-delay: -2s;
+}
+
+@keyframes preloader-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes preloader-bounce {
+
+  0%,
+  100% {
+    transform: scale(0);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+}
+
+.loaded_hiding .preloader {
+  transition: 0.3s opacity;
+  opacity: 0;
+}
+
+.loaded .preloader {
+  display: none;
+}
+
+
+#icon {
+  background-color: #78462C;
+  user-select: none; 
+  width: 70px;
+  height: 80px;
+  left: 50%;
+  margin-top: -10px;
+}
+
+#logo:hover {
+  background-color: #20130E !important;
+  cursor:default;
+}
+
+#navbar {
+  list-style: none;
+  padding: 10px 10px;
+  margin: 0;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  background-color: #20130E;
+
+  text-align: center;
+  border: none;
+  cursor: pointer;
+
+  list-style-type: none;
+  color: #EED8BD;
+}
+
+#navbar ul{
+    display: none;
+    background-color: #78462C;
+    position: absolute;
+    top: 100%;
+    font-size: 20px;
+  }
+  #navbar li:hover ul { display: block; }
+  #navbar, #navbar ul{
+
+    padding: 0;
+    list-style-type: none;
+  }
+
+  #navbar li {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Центрируем по горизонтали */
+    align-items: center; /* Центрируем по вертикали */
+    text-align: center;
+  }
+
+  #navbar a {
+    font-family: "Maler";
+    font-size: 20px;
+    display: block;
+    padding: 10px;
+    width: 100px;
+    color: #EED8BD;
+    text-decoration: none;
+    text-align: center;
+    user-select: none; 
+    padding: 10px 0;
+  }
+  
+  #navbar ul li { float: none; }
+  #navbar li:hover { background-color: #78462C; }
+  #navbar ul li:hover { background-color: #20130E; }
+
+.menu {
+    display: none;
+    position: absolute;
+    background: #D19E79;
+    padding: 10px;
+    border: 1px solid #ccc;
+    z-index: 12;
+    display: block;
+}
+
+img {
+    border: none; /* Убираем рамку у всех изображений */
+    outline: none; /* Убираем выделение при фокусе у изображений */
+    border:0;
+}
+
+/* Стили для сайдбара */
+.sidebar  {
+
+  right: -50%; /* начально сайдбар за пределами экрана */
+  position: fixed;
+  transition: right 0.5s; /* добавляем плавное появление */
+  height: 100%; /* Делает сайдбар на весь экран по высоте */
+  background-color: #20130E; /* Цвет фона сайдбара по умолчанию в Bootstrap */
+  padding: 20px;
+
+}
+
+.sidebar a{
+  text-decoration: none;
+  font-size: 23px;
+  color: #78462C;
+  margin-top: 24px;
+}
+.sidebar a:hover { 
+  background-color: #78462C; 
+  color: #EED8BD; 
+}
+
+.sidebar h2{
+  font-size: 30px;
+  color: #EED8BD;
+}
+
+
+
+.sidebar.open {
+  right: 0;
+  width: 300px;
+}
+
+.sidebar.closed {
+  transform: translateX(+50%);
+}
+
+.sideDown{
+  margin-top: 160%;
+  margin-left: -30px;
+  text-align: center;
+}
+.hi{
+  display: flex;
+}
+.hi a:hover{
+  background-color: #20130E;
+}
+#close{
+  height: 50px;
+  width: 50px;
+  margin-top: 30px;
+}
+
+.startList{
+  margin-top: 0.7%;
+  height: 550px;
+  background-image: url(../img/startMes.png);
+  background-size: 100% auto; /* Растягивать изображение на всю ширину элемента и пропорционально регулировать высоту */
+  background-position: center; /* Центрирование изображения */
+
+}
+
+.startList h1{
+  text-align: left; 
+  padding: 10px; /* Добавляем внутренний отступ */
+  font-size: 150px;
+  display: block;
+  color: #78462C;
+  margin-top: 20px; /* Отступ сверху для h1 */
+  margin-bottom: 0; /* Нулевой отступ снизу для h1 */
+  position: absolute; /* Позиционирование элемента h1 абсолютно */
+  top: 20%; /* Положение сверху относительно .startList */
+  left: 10%; /* Положение слева относительно .startList */
+  cursor: default;
+}
+
+
+#toTop {
+	display:none;
+	text-decoration:none;
+	position:fixed;
+	bottom:20px;
+	right:20px;
+	overflow:hidden;
+	width:51px;
+	height:51px;
+	border:none;
+	text-indent:100%;
+	background:url(../img/ui.totop.png) no-repeat left top;
+  margin-right: 20px;
+}
+
+#toTopHover {
+	background:url(../img/ui.totop.png) no-repeat left -51px;
+	width:51px;
+	height:51px;
+	display:block;
+	overflow:hidden;
+	float:left;
+	opacity: 0;
+	-moz-opacity: 0;
+	filter:alpha(opacity=0);
+}
+
+#toTop:active, #toTop:focus {
+	outline:none;
+}
+
+footer {
+  background-color: #20130E;
+  color:#EED8BD;
+  margin-top: 50px;
+  padding: 20px 0;
+}
+
+.footer-container {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-menu {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.footer-menu p {
+  cursor: default;
+}
+
+
+.footer-menu li {
+  margin-right: 20px;
+}
+
+.footer-menu a {
+  color:#EED8BD;
+  text-decoration: none;
+}
+
+.footer-menu a:hover { background-color: #78462C; }
+
+
+.social {display: inline-block;}
+.social a {
+	display: block;
+	width: 44px;
+	height: 44px;
+	margin: 6px 6px 6px 6px;
+	text-align: center;
+	color: #20130E;
+	background: #EED8BD;
+
+	border-radius: 24px;
+	
+}
+.social a:hover {color: #EED8BD;}
+.social svg {
+	margin-top: 7px;
+	width: 32px;
+	height: 32px;
+}
+.email a:hover {background: #78462C;}
+.telegram a:hover {background: #78462C;}
+.vk a:hover {background: #78462C;}
+
+.SortCoff h2{
+  color: #D19E79;
+  cursor: default;
+  font-size: 30px;
+  text-align: center;
+  height: 50%;
+}
+
+.menu-button img:hover {
+  transform: scale(.9);
+  }
+  
+  .menu-button img::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 7px;
+  right: 7px;
+  }
+
+  #close{
+    margin-top: -20px;
+  }

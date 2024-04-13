@@ -1,0 +1,80 @@
+
+  .Cards{
+    border-radius: 10px;
+    margin: 40px 0px 20px 0px;
+    padding: 0px 0px 0px 0px;
+    display: flex;
+    justify-content: space-around;
+  }
+  .Cards img{
+    width: 500px;
+    height: 500px;
+  }
+  .miniCards, .miniCardsCenter{
+    background: #EED8BD;
+    width: 500px;
+    height: 500px;
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+  
+    border-radius: 5px;
+  }
+  
+  .miniCards h3,   .miniCards p, .miniCardsCenter h3, .miniCardsCenter p{
+    align-self: end; 
+  }
+
+  .miniCards{
+    background: #EED8BD;
+    color: #78462C;
+  }
+
+  .miniCardsCenter{
+    background: #78462C;
+    color: #D19E79;
+  }
+    
+  .line{
+    background-color: #78462C;
+    height: 96px;
+  }
+  .line h2{
+    font-size: 45px;
+    padding: 15px;
+  }
+
+.itsOkey{
+  margin-top: 40px;
+  height: 500px;
+  width: auto;
+  border-radius: 10px;
+  display: inline-flex;
+  color: #EED8BD;
+}
+.itsOkey a {
+margin: 120px 30px 20px 30px;
+font-size: 36px;
+text-align: center;
+
+}
+
+.phItsOkey{
+    width: 400px;
+    height: 500px;
+}
+  
+.SortCoffee{
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+h3{
+  font-size: 30px;
+  margin-top: 0px;
+}
+
+.Cards li{
+  font-size: 25px;
+  margin-top: 10px;
+}

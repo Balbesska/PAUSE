@@ -1,0 +1,82 @@
+.Cards{
+    border-radius: 10px;
+    margin: 0px 0px 20px 0px;
+    padding: 0px;
+    display: flex;
+    justify-content: space-around;
+    width: 70%;
+    float: right;
+  }
+
+  .miniCards, .miniCardsCenter{
+    background: #EED8BD;
+    width: 400px;
+    height: 600px;
+    flex: 1;
+    margin: 40px 10px 10px 10px;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .miniCards{
+    background: #EED8BD;
+    color: #78462C;
+  }
+  .miniCardsCenter{
+    background: #78462C;
+    color: #D19E79;
+  }
+  
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+button {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #EED8BD;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #78462C;
+    color: #EED8BD;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #78462C;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.col-6 {
+    width: 400px;
+    float: left;
+    padding: 0 15px;
+    color: #EED8BD;
+    margin-top: 20px;
+    border-radius: 15px;
+    
+}
+
+
+.ex{
+  display:inline-block;
+  height: 700px;
+  width: auto;
+  margin: 30px;
+}
+
