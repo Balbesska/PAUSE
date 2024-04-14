@@ -97,15 +97,3 @@ document.getElementById("registerToggleBtn").addEventListener("click", function(
   document.getElementById("registrationForm").style.display = "block";
 });
 
-function logout() {
-  fetch('/logout', { method: 'GET' })
-  .then(response => {
-      if (response.redirected) {
-          window.location.href = response.url; // Перенаправление на указанный URL
-      }
-  })
-  .catch(error => {
-      console.error('Ошибка при выходе из аккаунта:', error);
-      // Дополнительная обработка ошибки, если необходимо
-  });
-}

@@ -18,6 +18,7 @@ const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const MongoClient    = require('mongodb').MongoClient;
+const path = require('path')
 
 
 const app = express();
@@ -34,8 +35,7 @@ app.use(passport.session());
 
 // Подключение к базе данных MongoDB
 mongoose.connect('mongodb://localhost:27017/pausedatabase', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+
 })
   .then(() => {
     console.log('Connected to MongoDB');
@@ -66,6 +66,11 @@ passport.use(new LocalStrategy(
   }
 ));
 
+
+app.use('/style', express.static(path.join(__dirname, 'style')))
+app.use('/js', express.static(path.join(__dirname, 'js')))
+app.use('/img', express.static(path.join(__dirname, 'img')))
+
 // Handling successful authentication
 app.post('/login', passport.authenticate('local', {
   successRedirect: '/lk',
@@ -78,6 +83,12 @@ app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/login');
 });
+
+app.get('/', function(req, res) {
+  res.sendFile(__dirname+'/HTML/main.html');
+});
+
+
 
 // Middleware для проверки роли пользователя
 function checkRole(role) {
