@@ -2,17 +2,14 @@
 
 @font-face {
   font-family: Maler;
-  src: url('text/Maler.ttf') format('woff2'),
+  src: url('../fonts/Maler.ttf') format('truetype');
 }
 
 body{
-    font-family: "Maler" ;
+    font-family: "Maler";
     background-color: #20130E;
-
     overflow-x: hidden;
 }
-
-
 
 .preloader {
   /*фиксированное позиционирование*/
@@ -136,9 +133,9 @@ body{
 
   #navbar a {
     font-family: "Maler";
-    font-size: 20px;
+    font-size: 18px;
     display: block;
-    padding: 10px;
+    padding: 15px;
     width: 100px;
     color: #EED8BD;
     text-decoration: none;
@@ -196,7 +193,6 @@ img {
 }
 
 
-
 .sidebar.open {
   right: 0;
   width: 300px;
@@ -229,7 +225,7 @@ img {
   background-image: url(../img/startMes.png);
   background-size: 100% auto; /* Растягивать изображение на всю ширину элемента и пропорционально регулировать высоту */
   background-position: center; /* Центрирование изображения */
-
+  background-repeat: no-repeat;
 }
 
 .startList h1{

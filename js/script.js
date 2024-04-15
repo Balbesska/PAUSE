@@ -23,15 +23,7 @@ function toggleSidebar() {
 
 document.getElementById('menu-button').addEventListener('click', toggleSidebar);
 
-document.addEventListener('DOMContentLoaded', function() {
-  var overlay = document.getElementById('overlay');
 
-  overlay.addEventListener('click', function() {
-    const sidebar = document.getElementById('sidebar');
-    sidebar.classList.remove('open');
-    overlay.style.display = 'none';
-  });
-});
 
 
 async function loadBootstrap() {
@@ -80,14 +72,3 @@ function startAutomaticScroll() {
     }
   }, 10);
 }
-
-document.getElementById("loginToggleBtn").addEventListener("click", function() {
-  document.getElementById("registrationForm").style.display = "none";
-  document.getElementById("loginForm").style.display = "block";
-});
-
-document.getElementById("registerToggleBtn").addEventListener("click", function() {
-  document.getElementById("loginForm").style.display = "none";
-  document.getElementById("registrationForm").style.display = "block";
-});
-

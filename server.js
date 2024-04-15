@@ -66,10 +66,11 @@ passport.use(new LocalStrategy(
   }
 ));
 
-
+app.use('/HTML', express.static(path.join(__dirname, 'HTML')))
 app.use('/style', express.static(path.join(__dirname, 'style')))
 app.use('/js', express.static(path.join(__dirname, 'js')))
 app.use('/img', express.static(path.join(__dirname, 'img')))
+app.use('/fonts', express.static(path.join(__dirname, 'fonts')))
 
 // Handling successful authentication
 app.post('/login', passport.authenticate('local', {
@@ -86,6 +87,30 @@ app.get('/logout', function(req, res) {
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname+'/HTML/main.html');
+});
+
+app.get('/main', function(req, res) {
+  res.sendFile(__dirname+'/HTML/main.html');
+});
+
+app.get('/news', function(req, res) {
+  res.sendFile(__dirname+'/HTML/news.html');
+});
+
+app.get('/about', function(req, res) {
+  res.sendFile(__dirname+'/HTML/about.html');
+});
+
+app.get('/lk', function(req, res) {
+  res.sendFile(__dirname+'/HTML/lk.html');
+});
+
+app.get('/menu', function(req, res) {
+  res.sendFile(__dirname+'/HTML/menu.html');
+});
+
+app.get('/contact', function(req, res) {
+  res.sendFile(__dirname+'/HTML/contact.html');
 });
 
 
