@@ -1,0 +1,56 @@
+
+#newss {
+    display: flex;
+    align-items: center;
+    background-color: #EED8BD;
+    color: #78462C;
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 10px;
+  }
+  
+  #newss > div {
+    flex: 1;
+    text-align: right;
+    margin-right: 20px;
+  }
+  #newss  p {
+    font-size: 20px;
+  }
+  #newss  h2 {
+    font-size: 30px;
+  }
+  
+
+  .chet {
+    height: 430px;
+    width: 800px;
+    margin: 0px 20px -4px 0px;
+   
+    border-radius: 10px  0px  0px 10px;
+    
+  }
+
+.nechet{
+    height: 430px;
+    width: 800px;
+    margin: 0px  -20px -4px 0px;
+    border-radius: 0px 10px  10px 0px;
+}
+
+
+
+  .itsOkey{
+    margin-top: 40px;
+    height: 170px;
+    width: auto;
+    border-radius: 10px;
+    text-align: center;
+    color: #EED8BD;
+  }
+  .itsOkey a {
+  margin: 10px 30px 20px 10px;
+  font-size: 36px;
+
+  }
+ 

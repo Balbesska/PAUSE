@@ -1,10 +1,4 @@
-window.onload = function () {
-  document.body.classList.add('loaded_hiding');
-  window.setTimeout(function () {
-    document.body.classList.add('loaded');
-    document.body.classList.remove('loaded_hiding');
-  }, 500);
-}
+
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
   const overlay = document.getElementById('overlay');
@@ -43,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function loadBootstrap() {
     await import('https://code.jquery.com/jquery-3.5.1.slim.min.js');
     await import('https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js');
-    await import('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js');
+    //await import('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js');
 }
 
 loadBootstrap();
@@ -57,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-//const carousel = document.querySelector('.carousel');
+const carousel = document.querySelector('.carousel');
 let isAutomatedScrolling = false;
 
 window.addEventListener('scroll', () => {

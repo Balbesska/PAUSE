@@ -89,4 +89,12 @@
     padding: 5px;
     margin-bottom: 10px;
   }
+
+  .SortCoff h2{
+    color: #D19E79;
+    cursor: default;
+    font-size: 30px;
+    text-align: center;
+    height: 50%;
+  }
   

@@ -75,12 +75,7 @@ body{
   }
 }
 
-.loaded_hiding .preloader {
-  transition: 0.3s opacity;
-  opacity: 0;
-}
-
-.loaded .preloader {
+.preloader {
   display: none;
 }
 
@@ -344,13 +339,6 @@ footer {
 .telegram a:hover {background: #78462C;}
 .vk a:hover {background: #78462C;}
 
-.SortCoff h2{
-  color: #D19E79;
-  cursor: default;
-  font-size: 30px;
-  text-align: center;
-  height: 50%;
-}
 
 .menu-button img:hover {
   transform: scale(.9);
