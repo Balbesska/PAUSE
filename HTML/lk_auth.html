@@ -124,39 +124,7 @@
             </div>
             <div class="ex">
             <div class="col-6">
-            <div id="registrationForm" class="col-6">
-              <h2>Регистрация</h2>
-              <!-- Форма регистрации -->
-              <form id="registrationFormFields" action="/register" method="POST">
-                  <!-- Поля для регистрации -->
-                  <label for="name">Имя</label>
-                  <input type="text" id="name" placeholder="Имя" required autocomplete="name">
-                  <label for="dob">Дата рождения</label>
-                  <input type="date" id="dob" required autocomplete="bday">
-                  <label for="phone">Номер телефона</label>
-                  <input type="tel" id="phone" placeholder="Номер телефона" required autocomplete="tel-national">
-                  <label for="login" >Логин</label>
-                  <input type="text" id="login" placeholder="Логин" required>
-                  <label for="password">Пароль</label>
-                  <input type="password" id="password" placeholder="Пароль" oninput="this.type='password'" required>
-                  <button type="submit" href="newUser">Зарегистрироваться</button>
-                  <button id="loginToggleBtn">Уже есть аккаунт?</button>
-              </form>
-          </div> 
-          <div id="loginForm" class="col-6" style="display: none;">
-              <h2>Авторизация</h2>
-              <!-- Форма авторизации -->
-              <form id="loginFormFields">
-                  <!-- Поля для авторизации -->
-                  <label for="login">Логин</label>
-                  <input type="text" id="login" placeholder="Логин" required>
-                  <label for="loginPassword">Пароль</label>
-                  <input type="password" id="loginPassword" placeholder="Пароль" required>
-
-                  <button type="submit" href="loginUser">Войти</button>
-                  <button id="registerToggleBtn">Нет аккаунта?</button>
-              </form>
-          </div>
+          
 
         </div>
         

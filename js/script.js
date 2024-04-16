@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const carousel = document.querySelector('.carousel');
 let isAutomatedScrolling = false;
 
-window.addEventListener('scroll', () => {
+/*window.addEventListener('scroll', () => {
   if (!isAutomatedScrolling) {
     const windowHeight = window.innerHeight;
     const carouselTop = carousel.getBoundingClientRect().top;
@@ -59,6 +59,7 @@ window.addEventListener('scroll', () => {
     }
   }
 });
+*/
 
 function startAutomaticScroll() {
   let currentPosition = carousel.scrollLeft;

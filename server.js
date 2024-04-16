@@ -1,14 +1,4 @@
-/* Подключение Express и Mongoose через тег script
-// Express (пример через CDN):
-const scriptExpress = document.createElement('script');
-scriptExpress.src = 'https://cdn.jsdelivr.net/npm/express';
-document.body.appendChild(scriptExpress);
 
-// Mongoose (пример через CDN):
-const scriptMongoose = document.createElement('script');
-scriptMongoose.src = 'https://cdn.jsdelivr.net/npm/mongoose';
-document.body.appendChild(scriptMongoose);
-*/
 
 const express = require('express');
 const session = require('express-session');
@@ -19,7 +9,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const MongoClient    = require('mongodb').MongoClient;
 const path = require('path')
-
+const salt = bcrypt.genSaltSync(10);
 
 const app = express();
 
@@ -56,12 +46,12 @@ const User = mongoose.model('User', new mongoose.Schema({
 
 // Passport Local Strategy
 passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
+  function(login, password, done) {
+    User.findOne({ login: login }, function(err, user) {
       if (err) return done(err);
-      if (!user) return done(null, false);
-      if (!bcrypt.compareSync(password, user.password)) return done(null, false);
-      return done(null, user);
+      if (!user) return done(null, false); // Пользователь не найден
+      if (!bcrypt.compareSync(password, user.password)) return done(null, false); // Неверный пароль
+      return done(null, user); // Успешная аутентификация
     });
   }
 ));
@@ -72,12 +62,50 @@ app.use('/js', express.static(path.join(__dirname, 'js')))
 app.use('/img', express.static(path.join(__dirname, 'img')))
 app.use('/fonts', express.static(path.join(__dirname, 'fonts')))
 
+app.post('/register', async (req, res) => {
+  const { username, login, phone, dateOfBirth, password } = req.body;
+  // Хеширование пароля
+  const passwordHash = bcrypt.hashSync(password, salt);
+  try {
+      const newUser = new User({
+          username,
+          login,
+          phone,
+          dateOfBirth,
+          password:passwordHash
+      });
+
+      await newUser.save();
+      console.log('Пользователь успешно зарегистрирован:', newUser);
+      res.send('Пользователь успешно зарегистрирован');
+  } catch (err) {
+    console.error('Ошибка при регистрации пользователя:', err);
+      res.status(400).send('Ошибка при регистрации пользователя: ' + err.message);
+  }
+});
+
 // Handling successful authentication
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/lk',
-  failureRedirect: '/login',
-  failureFlash: true
-}));
+app.post('/login', (req, res, next) => {
+  console.log('Start /login route');
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      console.error('Произошла ошибка во время аутентификации:', err);
+      return next(err);
+    }
+    if (!user) {
+      console.log('Пользователь не найден или неверный пароль');
+      return res.redirect('/login');
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        console.error('Ошибка во время аутентификации пользователя:', err);
+        return next(err);
+      }
+      console.log('Пользователь успешно авторизован:', user.username);
+      return res.redirect('/lk');
+    });
+  })(req, res, next);
+});
 
 // Handling user logout
 app.get('/logout', function(req, res) {
@@ -102,11 +130,23 @@ app.get('/about', function(req, res) {
 });
 
 app.get('/lk', function(req, res) {
-  res.sendFile(__dirname+'/HTML/lk.html');
+  if (req.session.authenticated) {
+    res.sendFile(__dirname + '/HTML/lk_auth.html');
+} else {
+    res.sendFile(__dirname + '/HTML/lk.html');
+}
+});
+app.get('/franshiza', function(req, res) {
+  res.sendFile(__dirname+'/HTML/franshiza.html');
 });
 
+
 app.get('/menu', function(req, res) {
-  res.sendFile(__dirname+'/HTML/menu.html');
+  if (req.session.authenticated) {
+    res.sendFile(__dirname + '/HTML/menu_auth.html');
+} else {
+    res.sendFile(__dirname + '/HTML/menu.html');
+}
 });
 
 app.get('/contact', function(req, res) {
@@ -135,30 +175,6 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
-// Роут для регистрации новых пользователей
-app.post('/register', async (req, res) => {
-  const { username, login, phone, dateOfBirth, password } = req.body;
-  
-  // Хеширование пароля
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  try {
-      const newUser = new User({
-          username,
-          login,
-          phone,
-          dateOfBirth,
-          password: hashedPassword
-      });
-      
-      await newUser.save();
-
-      res.status(201).json({ message: 'Пользователь успешно зарегистрирован', user: newUser });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Произошла ошибка при регистрации пользователя' });
-    }
-});
 
 // Роут для страницы меню, доступной только авторизованным пользователям
 app.get('/menu', ensureAuthenticated, checkRole('user'), (req, res) => {
