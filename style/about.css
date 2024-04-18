@@ -4,3 +4,62 @@ body{
   footer{
     margin-left: 18%;
   }
+
+  .itsOkey{
+    margin-top: 30px;
+    height: 100px;
+    width: auto;
+    border-radius: 10px;
+    text-align: center;
+    color: #EED8BD;
+    margin-bottom: 20px;
+  }
+  .itsOkey a {
+  font-size: 36px;
+  }
+  .storyName{
+    display: inline-flex;
+    margin-top: -30px;
+  }
+  .storyText{
+    background-color: #EED8BD;
+    border-radius: 10px;
+    height: 400px;
+    width: 40%;
+    padding: 15px;
+    color: #78462C;
+    font-size: 22px;
+
+  }
+  .storyText h2, .logoText h2{
+    font-size: 38px;
+    color: #20130E;
+  }
+.logoTime{
+  border-radius: 10px;
+  height: 400px;
+  width: 820px;
+  float: right;
+  margin-left: 20px;
+}
+.storyLogo{
+  display: inline-flex;
+  margin-top: 50px;
+} 
+.logoAb{
+  height: 400px;
+  width: 400px;
+  float: left;
+  margin-right: 20px;
+  border: none;
+
+}
+.logoText{
+  background-color: #EED8BD;
+    border-radius: 10px;
+    height: 400px;
+    width: 70%;
+    padding: 15px;
+    color: #78462C;
+    font-size: 22px;
+}

@@ -63,7 +63,9 @@ app.use('/img', express.static(path.join(__dirname, 'img')))
 app.use('/fonts', express.static(path.join(__dirname, 'fonts')))
 
 app.post('/register', async (req, res) => {
-  const { username, login, phone, dateOfBirth, password } = req.body;
+  console.log(req.body);
+  res.status(200).send('name is '+req.body.name);
+  /*const { username, login, phone, dateOfBirth, password } = req.body;
   // Хеширование пароля
   const passwordHash = bcrypt.hashSync(password, salt);
   try {
@@ -82,6 +84,8 @@ app.post('/register', async (req, res) => {
     console.error('Ошибка при регистрации пользователя:', err);
       res.status(400).send('Ошибка при регистрации пользователя: ' + err.message);
   }
+  */
+
 });
 
 // Handling successful authentication
@@ -136,8 +140,13 @@ app.get('/lk', function(req, res) {
     res.sendFile(__dirname + '/HTML/lk.html');
 }
 });
+
 app.get('/franshiza', function(req, res) {
   res.sendFile(__dirname+'/HTML/franshiza.html');
+});
+
+app.get('/contact', function(req, res) {
+  res.sendFile(__dirname+'/HTML/contact.html');
 });
 
 

@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="../style/lk.css">
     <link href="https://fonts.cdnfonts.com/css/maler" rel="stylesheet">
     <script src="../js/script.js" defer></script>
-    <script src="../server.js" type="application/javascript"></script>
     <script>
 
       document.addEventListener('DOMContentLoaded', function() {
@@ -135,11 +134,11 @@
                   <input type="date" id="dob" required autocomplete="bday">
                   <label for="phone">Номер телефона</label>
                   <input type="tel" id="phone" placeholder="Номер телефона" required autocomplete="tel-national">
-                  <label for="login" >Логин</label>
-                  <input type="text" id="login" placeholder="Логин" required>
+                  <label for="reglogin">Логин</label>
+                  <input type="text" id="reglogin" placeholder="Логин" required>
                   <label for="password">Пароль</label>
                   <input type="password" id="password" placeholder="Пароль" oninput="this.type='password'" required>
-                  <button type="submit" href="newUser">Зарегистрироваться</button>
+                  <button type="submit">Зарегистрироваться</button>
                   <button id="loginToggleBtn">Уже есть аккаунт?</button>
               </form>
           </div> 
