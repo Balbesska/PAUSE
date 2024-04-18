@@ -63,14 +63,14 @@ app.use('/img', express.static(path.join(__dirname, 'img')))
 app.use('/fonts', express.static(path.join(__dirname, 'fonts')))
 
 app.post('/register', async (req, res) => {
-  console.log(req.body);
-  res.status(200).send('name is '+req.body.name);
-  /*const { username, login, phone, dateOfBirth, password } = req.body;
+  // console.log(req.body);
+  // res.status(200).send('name is '+req.body.name);
+  const { name, login, phone, dateOfBirth, password } = req.body;
   // Хеширование пароля
   const passwordHash = bcrypt.hashSync(password, salt);
   try {
       const newUser = new User({
-          username,
+          name,
           login,
           phone,
           dateOfBirth,
@@ -79,13 +79,12 @@ app.post('/register', async (req, res) => {
 
       await newUser.save();
       console.log('Пользователь успешно зарегистрирован:', newUser);
-      res.send('Пользователь успешно зарегистрирован');
+      //res.send('Пользователь успешно зарегистрирован');
+      res.sendFile(__dirname + '/HTML/lk_auth.html');
   } catch (err) {
     console.error('Ошибка при регистрации пользователя:', err);
       res.status(400).send('Ошибка при регистрации пользователя: ' + err.message);
   }
-  */
-
 });
 
 // Handling successful authentication

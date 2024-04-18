@@ -129,15 +129,15 @@
               <form id="registrationFormFields" action="/register" method="POST">
                   <!-- Поля для регистрации -->
                   <label for="name">Имя</label>
-                  <input type="text" id="name" placeholder="Имя" required autocomplete="name">
+                  <input type="text" id="name" name="name" placeholder="Имя" required autocomplete="name">
                   <label for="dob">Дата рождения</label>
-                  <input type="date" id="dob" required autocomplete="bday">
+                  <input type="date" id="dob" name="dob" required autocomplete="bday">
                   <label for="phone">Номер телефона</label>
-                  <input type="tel" id="phone" placeholder="Номер телефона" required autocomplete="tel-national">
+                  <input type="tel" id="phone" name="phone" placeholder="Номер телефона" required autocomplete="tel-national">
                   <label for="reglogin">Логин</label>
-                  <input type="text" id="reglogin" placeholder="Логин" required>
+                  <input type="text" id="reglogin" name="reglogin" placeholder="Логин" required>
                   <label for="password">Пароль</label>
-                  <input type="password" id="password" placeholder="Пароль" oninput="this.type='password'" required>
+                  <input type="password" id="password" name="password" placeholder="Пароль" oninput="this.type='password'" required>
                   <button type="submit">Зарегистрироваться</button>
                   <button id="loginToggleBtn">Уже есть аккаунт?</button>
               </form>
