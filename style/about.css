@@ -31,7 +31,7 @@ body{
     font-size: 22px;
 
   }
-  .storyText h2, .logoText h2{
+  .storyText h2, .logoText h2, .ideaText h2{
     font-size: 38px;
     color: #20130E;
   }
@@ -42,24 +42,46 @@ body{
   float: right;
   margin-left: 20px;
 }
-.storyLogo{
+.storyLogo {
   display: inline-flex;
   margin-top: 50px;
 } 
 .logoAb{
-  height: 400px;
-  width: 400px;
+  height: 280px;
+  width: 300px;
   float: left;
   margin-right: 20px;
   border: none;
 
 }
 .logoText{
-  background-color: #EED8BD;
+    background-color: #EED8BD;
     border-radius: 10px;
-    height: 400px;
-    width: 70%;
+    height: 280px;
+    width: 80%;
     padding: 15px;
     color: #78462C;
     font-size: 22px;
+}
+.idea{
+  display: inline-flex;
+  margin-top: 50px;
+  background-color: #EED8BD;
+  border-radius: 10px;
+  height: 380px;
+}
+.ideaText{
+ 
+  width: 80%;
+  padding: 15px;
+  color: #78462C;
+  font-size: 22px;
+}
+.ideaimg{
+  height: 380px;
+  width: 300px;
+  float: right;
+  margin-right: 20px;
+  border-radius: 0px 10px 10px 0px;
+  margin-right: 0px;
 }

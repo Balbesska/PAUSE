@@ -334,7 +334,7 @@ footer {
 .email a:hover {background: #78462C;}
 .telegram a:hover {background: #78462C;}
 .vk a:hover {background: #78462C;}
-
+.discord a:hover {background: #78462C;}
 
 .menu-button img:hover {
   transform: scale(.9);
@@ -351,3 +351,4 @@ footer {
   #close{
     margin-top: -20px;
   }
+

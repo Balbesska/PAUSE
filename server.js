@@ -65,16 +65,16 @@ app.use('/fonts', express.static(path.join(__dirname, 'fonts')))
 app.post('/register', async (req, res) => {
   // console.log(req.body);
   // res.status(200).send('name is '+req.body.name);
-  const { name, login, phone, dateOfBirth, password } = req.body;
+  const { name, reglogin, phone, dob, password } = req.body;
   // Хеширование пароля
   const passwordHash = bcrypt.hashSync(password, salt);
   try {
       const newUser = new User({
-          name,
-          login,
-          phone,
-          dateOfBirth,
-          password:passwordHash
+          username: name,
+          login: reglogin,
+          phone: phone,
+          dateOfBirth: dob,
+          password: passwordHash
       });
 
       await newUser.save();
@@ -82,8 +82,7 @@ app.post('/register', async (req, res) => {
       //res.send('Пользователь успешно зарегистрирован');
       res.sendFile(__dirname + '/HTML/lk_auth.html');
   } catch (err) {
-    console.error('Ошибка при регистрации пользователя:', err);
-      res.status(400).send('Ошибка при регистрации пользователя: ' + err.message);
+      res.sendFile(__dirname + '/HTML/errReg.html');
   }
 });
 
@@ -93,7 +92,7 @@ app.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       console.error('Произошла ошибка во время аутентификации:', err);
-      return next(err);
+      return res.sendFile(__dirname + '/HTML/errReg.html');;
     }
     if (!user) {
       console.log('Пользователь не найден или неверный пароль');
@@ -102,7 +101,7 @@ app.post('/login', (req, res, next) => {
     req.logIn(user, (err) => {
       if (err) {
         console.error('Ошибка во время аутентификации пользователя:', err);
-        return next(err);
+        return  res.sendFile(__dirname + '/HTML/errReg.html');;
       }
       console.log('Пользователь успешно авторизован:', user.username);
       return res.redirect('/lk');
@@ -113,7 +112,7 @@ app.post('/login', (req, res, next) => {
 // Handling user logout
 app.get('/logout', function(req, res) {
   req.logout();
-  res.redirect('/login');
+  res.redirect('/lk');
 });
 
 app.get('/', function(req, res) {

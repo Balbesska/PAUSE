@@ -1,0 +1,29 @@
+body{
+    margin-left: -20%;
+  }
+
+footer{
+    margin-left: 18%;
+  }
+.err{
+    margin-top: 200px;
+    margin-bottom: 200px;
+    text-align: center;
+  }
+
+  .makepause{
+    display: inline-block;
+    color: #C9A07F;
+    font-size: 120px;
+    margin-left: -10px;
+  }
+  .makepause img{
+    height: 130px;
+    width: 130px;
+  }
+
+  .tryagain{
+    color: #EED8BD;
+    font-size: 30px;
+  }
+  

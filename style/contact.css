@@ -1,0 +1,41 @@
+body{
+    margin-left: -20%;
+  }
+  footer{
+    margin-left: 18%;
+  }
+
+.info{
+    width: 100%;
+    height: 500px;
+    display: inline-block;
+    margin-top: 50px;
+}
+
+.contacts{
+    background-color: #EED8BD;
+    width: 60%;
+    height: 500px;
+    padding: 15px;
+    border-radius: 15px;
+    float: inline-start;
+    color: #78462C;
+    font-size: 20px;
+
+}
+.map{
+    border-radius: 15px;
+    overflow: hidden;
+    float: inline-end;
+    margin-left: -20px;
+}
+
+
+.contacts h2{
+    color: #20130E;
+}
+.question{
+    font-size: 30px;
+    color: #78462C;
+    text-decoration: none;
+}
