@@ -4,38 +4,37 @@ function toggleSidebar() {
   const overlay = document.getElementById('overlay');
 
   sidebar.classList.toggle('open');
-  overlay.style.display = sidebar.classList.contains('open') ? 'block' : 'none';
+
 
   if (sidebar.classList.contains('open')) {
       document.addEventListener('click', closeSidebarOutside);
-  } else {
+  } else if (sidebar.classList.contains('close')) {
       document.removeEventListener('click', closeSidebarOutside);
   }
 
   function closeSidebarOutside(event) {
-      if (!event.target.closest('#sidebar') && !event.target.closest('#menu-button')) {
+      if (!event.target.closest('#sidebar') && !event.target.closest('#close-button')) {
           sidebar.classList.remove('open');
-          overlay.style.display = 'none';
-          document.removeEventListener('click', closeSidebarOutside);
       }
   }
 }
 
-document.getElementById('menu-button').addEventListener('click', toggleSidebar);
-
-
+document.getElementById('menu-button').addEventListener('click', function() {
+  document.querySelector('.sidebar').classList.toggle('open');
+});
+document.getElementById('close-button').addEventListener('click', function() {
+  sidebar = document.querySelector('.sidebar');
+  sidebar.classList.toggle('open');
+});
 
 
 async function loadBootstrap() {
     await import('https://code.jquery.com/jquery-3.5.1.slim.min.js');
     await import('https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js');
-    //await import('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js');
 }
 
 loadBootstrap();
-document.getElementById('menu-button').addEventListener('click', function() {
-    document.querySelector('.sidebar').classList.toggle('open');
-});
+
 document.addEventListener('DOMContentLoaded', function() {
     var images = document.getElementsByTagName('img');
     for(var i = 0; i < images.length; i++) {

@@ -165,7 +165,7 @@ img {
 }
 
 /* Стили для сайдбара */
-.sidebar  {
+.sidebar {
 
   right: -50%; /* начально сайдбар за пределами экрана */
   position: fixed;
@@ -336,17 +336,19 @@ footer {
 .vk a:hover {background: #78462C;}
 .discord a:hover {background: #78462C;}
 
+.menu-button{
+  margin: 30px 50px 10px 0px;
+}
 .menu-button img:hover {
   transform: scale(.9);
   }
   
-  .menu-button img::before {
-  content: '';
+  .menu-button img {
   position: absolute;
-  top: -20px;
-  left: 7px;
-  right: 7px;
+
+  cursor: pointer;
   }
+
 
   #close{
     margin-top: -20px;
