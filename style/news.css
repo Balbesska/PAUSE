@@ -52,6 +52,14 @@ footer{
     
   }
 
+  .nature {
+    height: 500px; 
+    width: 360px;
+    margin: 0px 190px 0px 0px;
+    border-radius: 10px  0px  0px 10px;
+    
+  }
+
   .firstcoffee{
       height: 400px;
       width: 500px;
@@ -81,7 +89,17 @@ footer{
   }
  
 
-
+ .travel{
+  display: flex;
+  align-items: center;
+  background-color: #EED8BD;
+  color: #78462C;
+  width: 100%;
+  border-radius: 10px;
+  margin-top: -20px;
+  margin-bottom: 100px;
+  font-size: 20px;
+ }
 
 
 

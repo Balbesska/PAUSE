@@ -175,7 +175,13 @@ app.get('/main', function(req, res) {
 });
 
 app.get('/news', function(req, res) {
-  res.sendFile(__dirname+'/HTML/news.html');
+  if (req.session.user) {
+    // Пользователь авторизован
+    res.render('news', { user: req.session.user });
+  } else {
+    // Пользователь не авторизован
+    res.sendFile(__dirname + '/HTML/news.html');
+  }
 });
 
 app.get('/about', function(req, res) {
@@ -204,7 +210,7 @@ app.get('/contact', function(req, res) {
 app.get('/menu', function(req, res) {
   if (req.session.user) {
     // Пользователь авторизован
-    res.sendFile(__dirname + '/HTML/menu_auth.html');
+    res.render('menu_auth', { user: req.session.user });
   } else {
     // Пользователь не авторизован
     res.sendFile(__dirname + '/HTML/menu.html');
