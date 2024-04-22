@@ -10,16 +10,23 @@ const LocalStrategy = require('passport-local').Strategy;
 const MongoClient    = require('mongodb').MongoClient;
 const path = require('path')
 const salt = bcrypt.genSaltSync(10);
-
+var router = express.Router();
 const app = express();
+
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(session({
-  secret: 'secret_key',
+  secret: 'kulakova',
   resave: false,
   saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -32,8 +39,8 @@ mongoose.connect('mongodb://localhost:27017/pausedatabase', {
   })
   .catch((err) => console.error('Error connecting to MongoDB:', err));
 const User = mongoose.model('User', new mongoose.Schema({
-  username: String,
-  login: {
+  fullname: String,
+  username: {
     type: String,
     unique: true
   },
@@ -46,15 +53,31 @@ const User = mongoose.model('User', new mongoose.Schema({
 
 // Passport Local Strategy
 passport.use(new LocalStrategy(
-  function(login, password, done) {
-    User.findOne({ login: login }, function(err, user) {
-      if (err) return done(err);
-      if (!user) return done(null, false); // Пользователь не найден
-      if (!bcrypt.compareSync(password, user.password)) return done(null, false); // Неверный пароль
-      return done(null, user); // Успешная аутентификация
-    });
+  async function verify(username, password, done) {
+    var myUser = await User.findOne({ username: username }).exec();
+    if (myUser) {
+      if (!bcrypt.compareSync(password, myUser.password)) {
+        return done(null, false); // Неверный пароль
+      }
+      return done(null, myUser); // Успешная аутентификация
+    } else{ 
+      return done(null, false) // Пользователь не найден
+    }; 
   }
 ));
+
+passport.serializeUser(function(user, cb) {
+  process.nextTick(function() {
+    cb(null, { username: user.username });
+  });
+});
+
+passport.deserializeUser(function(user, cb) {
+  process.nextTick(function() {
+    return cb(null, user);
+  });
+});
+
 
 app.use('/HTML', express.static(path.join(__dirname, 'HTML')))
 app.use('/style', express.static(path.join(__dirname, 'style')))
@@ -65,13 +88,13 @@ app.use('/fonts', express.static(path.join(__dirname, 'fonts')))
 app.post('/register', async (req, res) => {
   // console.log(req.body);
   // res.status(200).send('name is '+req.body.name);
-  const { name, reglogin, phone, dob, password } = req.body;
+  const { fullname, username, phone, dob, password } = req.body;
   // Хеширование пароля
   const passwordHash = bcrypt.hashSync(password, salt);
   try {
       const newUser = new User({
-          username: name,
-          login: reglogin,
+          fullname: fullname,
+          username: username,
           phone: phone,
           dateOfBirth: dob,
           password: passwordHash
@@ -80,7 +103,22 @@ app.post('/register', async (req, res) => {
       await newUser.save();
       console.log('Пользователь успешно зарегистрирован:', newUser);
       //res.send('Пользователь успешно зарегистрирован');
-      res.sendFile(__dirname + '/HTML/lk_auth.html');
+      var user = {
+        fullname: fullname,
+          username: username,
+          phone: phone,
+          dateOfBirth: dob,
+          password: passwordHash
+      };
+      req.logIn(user, (err) => {
+        if (err) {
+          console.error('Ошибка во время аутентификации пользователя:', err);
+          return  res.sendFile(__dirname + '/HTML/errLog.html');
+        }
+        console.log('Пользователь успешно авторизован:', user.fullname);
+        req.session.user = user;
+        res.render('lk_auth', { user: req.user });
+      });
   } catch (err) {
       res.sendFile(__dirname + '/HTML/errReg.html');
   }
@@ -89,30 +127,43 @@ app.post('/register', async (req, res) => {
 // Handling successful authentication
 app.post('/login', (req, res, next) => {
   console.log('Start /login route');
+  
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       console.error('Произошла ошибка во время аутентификации:', err);
-      return res.sendFile(__dirname + '/HTML/errReg.html');;
+      return res.sendFile(__dirname + '/HTML/errLog.html');
     }
     if (!user) {
       console.log('Пользователь не найден или неверный пароль');
       return res.redirect('/login');
     }
-    req.logIn(user, (err) => {
-      if (err) {
-        console.error('Ошибка во время аутентификации пользователя:', err);
-        return  res.sendFile(__dirname + '/HTML/errReg.html');;
-      }
-      console.log('Пользователь успешно авторизован:', user.username);
-      return res.redirect('/lk');
-    });
+    req.session.user = user;
+    res.render('lk_auth', { user: user });
   })(req, res, next);
 });
 
+app.post('/login', passport.authenticate('local', {
+  successRedirect: '/lk_auth', // перенаправление на страницу профиля при успешной аутентификации
+  failureRedirect: '/login',  // перенаправление на страницу входа при ошибке 
+  failureFlash: true  // активация флеш-сообщений при ошибке аутентификации
+}));
+
+router.get('/', function(req, res, next) {
+  if (!req.user) { return res.render('/lk'); }
+  next();
+  res.locals.filter = null;
+  res.render('/lk_auth', { user: req.user });
+	});
+
+
 // Handling user logout
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/lk');
+app.post('/logout', function(req, res) {
+  req.logout(function(err) {
+    if (err) {
+      return res.status(500).send('Error logging out');
+    }
+    res.redirect('/'); // Перенаправляем пользователя после выхода
+  });
 });
 
 app.get('/', function(req, res) {
@@ -132,11 +183,13 @@ app.get('/about', function(req, res) {
 });
 
 app.get('/lk', function(req, res) {
-  if (req.session.authenticated) {
-    res.sendFile(__dirname + '/HTML/lk_auth.html');
-} else {
+  if (req.session.user) {
+    // Пользователь авторизован
+    res.render('lk_auth', { user: req.session.user });
+  } else {
+    // Пользователь не авторизован
     res.sendFile(__dirname + '/HTML/lk.html');
-}
+  }
 });
 
 app.get('/franshiza', function(req, res) {
@@ -149,11 +202,13 @@ app.get('/contact', function(req, res) {
 
 
 app.get('/menu', function(req, res) {
-  if (req.session.authenticated) {
+  if (req.session.user) {
+    // Пользователь авторизован
     res.sendFile(__dirname + '/HTML/menu_auth.html');
-} else {
+  } else {
+    // Пользователь не авторизован
     res.sendFile(__dirname + '/HTML/menu.html');
-}
+  }
 });
 
 app.get('/contact', function(req, res) {
@@ -176,9 +231,9 @@ function checkRole(role) {
 // Middleware для проверки аутентификации
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    return next();
+      return next();
   } else {
-    res.redirect('/login');
+      res.redirect('/login'); // Если пользователь не аутентифицирован, перенаправляем на страницу входа
   }
 }
 
