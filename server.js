@@ -86,8 +86,6 @@ app.use('/img', express.static(path.join(__dirname, 'img')))
 app.use('/fonts', express.static(path.join(__dirname, 'fonts')))
 
 app.post('/register', async (req, res) => {
-  // console.log(req.body);
-  // res.status(200).send('name is '+req.body.name);
   const { fullname, username, phone, dob, password } = req.body;
   // Хеширование пароля
   const passwordHash = bcrypt.hashSync(password, salt);
@@ -127,7 +125,6 @@ app.post('/register', async (req, res) => {
 // Handling successful authentication
 app.post('/login', (req, res, next) => {
   console.log('Start /login route');
-  
   passport.authenticate('local', (err, user, info) => {
     if (err) {
       console.error('Произошла ошибка во время аутентификации:', err);
@@ -135,7 +132,7 @@ app.post('/login', (req, res, next) => {
     }
     if (!user) {
       console.log('Пользователь не найден или неверный пароль');
-      return res.redirect('/login');
+      return res.sendFile(__dirname + '/HTML/errLog.html');
     }
     req.session.user = user;
     res.render('lk_auth', { user: user });
@@ -246,29 +243,6 @@ app.get('/menu', function(req, res) {
     res.sendFile(__dirname + '/HTML/menu.html');
   }
 });
-
-
-
-
-// Middleware для проверки роли пользователя
-function checkRole(role) {
-  return function(req, res, next) {
-    if (req.isAuthenticated() && req.user.role === role) {
-      return next();
-    } else {
-      res.status(403).send('Доступ запрещен');
-    }
-  };
-}
-
-// Middleware для проверки аутентификации
-function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-      return next();
-  } else {
-      res.redirect('/login'); // Если пользователь не аутентифицирован, перенаправляем на страницу входа
-  }
-}
 
 
 const port = 8000;
