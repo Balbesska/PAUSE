@@ -104,7 +104,7 @@ app.post('/register', async (req, res) => {
       console.log('Пользователь успешно зарегистрирован:', newUser);
       //res.send('Пользователь успешно зарегистрирован');
       var user = {
-        fullname: fullname,
+          fullname: fullname,
           username: username,
           phone: phone,
           dateOfBirth: dob,
@@ -167,11 +167,23 @@ app.post('/logout', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname+'/HTML/main.html');
+  if (req.session.user) {
+    // Пользователь авторизован
+    res.render('main', { user: req.session.user });
+  } else {
+    // Пользователь не авторизован
+    res.sendFile(__dirname + '/HTML/main.html');
+  }
 });
 
 app.get('/main', function(req, res) {
-  res.sendFile(__dirname+'/HTML/main.html');
+  if (req.session.user) {
+    // Пользователь авторизован
+    res.render('main', { user: req.session.user });
+  } else {
+    // Пользователь не авторизован
+    res.sendFile(__dirname + '/HTML/main.html');
+  }
 });
 
 app.get('/news', function(req, res) {
@@ -185,7 +197,13 @@ app.get('/news', function(req, res) {
 });
 
 app.get('/about', function(req, res) {
-  res.sendFile(__dirname+'/HTML/about.html');
+  if (req.session.user) {
+    // Пользователь авторизован
+    res.render('about', { user: req.session.user });
+  } else {
+    // Пользователь не авторизован
+    res.sendFile(__dirname + '/HTML/about.html');
+  }
 });
 
 app.get('/lk', function(req, res) {
@@ -199,11 +217,23 @@ app.get('/lk', function(req, res) {
 });
 
 app.get('/franshiza', function(req, res) {
-  res.sendFile(__dirname+'/HTML/franshiza.html');
+  if (req.session.user) {
+    // Пользователь авторизован
+    res.render('franshiza', { user: req.session.user });
+  } else {
+    // Пользователь не авторизован
+    res.sendFile(__dirname + '/HTML/franshiza.html');
+  }
 });
 
 app.get('/contact', function(req, res) {
-  res.sendFile(__dirname+'/HTML/contact.html');
+  if (req.session.user) {
+    // Пользователь авторизован
+    res.render('contact', { user: req.session.user });
+  } else {
+    // Пользователь не авторизован
+    res.sendFile(__dirname + '/HTML/contact.html');
+  }
 });
 
 
@@ -217,9 +247,6 @@ app.get('/menu', function(req, res) {
   }
 });
 
-app.get('/contact', function(req, res) {
-  res.sendFile(__dirname+'/HTML/contact.html');
-});
 
 
 
@@ -243,18 +270,6 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
-
-// Роут для страницы меню, доступной только авторизованным пользователям
-app.get('/menu', ensureAuthenticated, checkRole('user'), (req, res) => {
-  res.send('Здесь находится меню кофейни');
-});
-
-
-app.get('/admin', checkRole('admin'), (req, res) => {
-  // Все, что находится здесь, будет доступно только пользователям с ролью 'admin'
-  res.sendFile(__dirname + '../HTML/admin.html'); // Отправляем файл 'admin.html' в ответ на запрос
-});
-// Здесь вы можете добавить другие роуты и middleware по необходимости
 
 const port = 8000;
 app.listen(port, () => {

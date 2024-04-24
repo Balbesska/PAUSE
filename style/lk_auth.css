@@ -2,5 +2,52 @@
     color: #EED8BD;
      text-align: center;
      margin-top: 30px;
-     font-size: 30px;
+     font-size: 36px;
 }
+
+.logout{
+    margin-top: 80px;
+}
+
+.userdata{
+    width: 45%;
+    height: 500px;
+    font-size: 28px;
+    padding: 10px;
+    background-color: #EED8BD;
+    border-radius: 10px;
+    color: #78462C;
+    margin-left: -12px;
+}
+
+.userdata h2{
+    font-size: 36px;
+    color:#20130E;
+    margin-top: 10px;
+}
+
+.userdata p{
+    margin-top: 90px;
+}
+
+.plus{
+    width: 50%;
+    height: 500px;
+    float: inline-end;
+    margin-left: 40px;
+    font-size: 17px;
+    padding: 5px;
+    width: 55%;
+}
+
+.col-6{
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-flex;
+}
+
+footer{
+    margin: -20px 20px 0px 20px;
+}
+
